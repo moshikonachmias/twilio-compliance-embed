@@ -11,13 +11,15 @@ Provides a simple React interface to render Twilio Compliance registration exper
 ### Build
 
 ```sh
-yarn build
+make build
 ```
 
 ### Package
 
+Update version in package.json
+
 ```sh
-yarn pack
+make package
 ```
 
 ## ISV Usage

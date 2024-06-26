@@ -1,6 +1,9 @@
 import * as React from "react";
-import { Inquiry } from "persona";
+import Inquiry from "persona-react";
 import styled from "styled-components";
+
+const PAGE_CHANGE_EVENT = "page-change";
+const TWILIO_INQUIRY_COMPLETED_PAGE = "twilio_inquiry_completed";
 
 interface TwilioComplianceEmbedProps {
   inquiryId: string;
@@ -9,6 +12,13 @@ interface TwilioComplianceEmbedProps {
   onCancel?: () => void;
   onError?: () => void;
   onReady?: () => void;
+  widgetPadding?: {
+    top?: number;
+    bottom?: number;
+    left?: number;
+    right?: number;
+  };
+  onInquirySubmitted?: () => void;
 }
 
 export const TwilioComplianceEmbed = ({
@@ -18,6 +28,8 @@ export const TwilioComplianceEmbed = ({
   onCancel = (): void => {},
   onError = (): void => {},
   onReady = (): void => {},
+  onInquirySubmitted = (): void => {},
+  widgetPadding,
 }: TwilioComplianceEmbedProps): React.ReactElement => {
   // The Incredible Singing Cat solution for responsive iframes
   // See https://stackoverflow.com/a/29784327
@@ -45,6 +57,17 @@ export const TwilioComplianceEmbed = ({
         onCancel={onCancel}
         onError={onError}
         onReady={onReady}
+        widgetPadding={widgetPadding}
+        onEvent={(event, metaData) => {
+          if (
+            event === PAGE_CHANGE_EVENT &&
+            (metaData?.name as string)?.startsWith(
+              TWILIO_INQUIRY_COMPLETED_PAGE
+            )
+          ) {
+            onInquirySubmitted();
+          }
+        }}
       />
     </Container>
   );

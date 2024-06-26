@@ -1,6 +1,6 @@
 var $8zHUo$reactjsxruntime = require("react/jsx-runtime");
 require("react");
-var $8zHUo$persona = require("persona");
+var $8zHUo$personareact = require("persona-react");
 var $8zHUo$styledcomponents = require("styled-components");
 
 function $parcel$exportWildcard(dest, source) {
@@ -34,7 +34,9 @@ $parcel$export($967b7369315e4395$exports, "TwilioComplianceEmbed", () => $967b73
 
 
 
-const $967b7369315e4395$export$fc241e6f86209970 = ({ inquiryId: inquiryId, inquirySessionToken: inquirySessionToken, onComplete: onComplete = ()=>{}, onCancel: onCancel = ()=>{}, onError: onError = ()=>{}, onReady: onReady = ()=>{} })=>{
+const $967b7369315e4395$var$PAGE_CHANGE_EVENT = "page-change";
+const $967b7369315e4395$var$TWILIO_INQUIRY_COMPLETED_PAGE = "twilio_inquiry_completed";
+const $967b7369315e4395$export$fc241e6f86209970 = ({ inquiryId: inquiryId, inquirySessionToken: inquirySessionToken, onComplete: onComplete = ()=>{}, onCancel: onCancel = ()=>{}, onError: onError = ()=>{}, onReady: onReady = ()=>{}, onInquirySubmitted: onInquirySubmitted = ()=>{}, widgetPadding: widgetPadding })=>{
     // The Incredible Singing Cat solution for responsive iframes
     // See https://stackoverflow.com/a/29784327
     const Container = (0, ($parcel$interopDefault($8zHUo$styledcomponents))).div`
@@ -52,13 +54,17 @@ const $967b7369315e4395$export$fc241e6f86209970 = ({ inquiryId: inquiryId, inqui
     }
   `;
     return /*#__PURE__*/ (0, $8zHUo$reactjsxruntime.jsx)(Container, {
-        children: /*#__PURE__*/ (0, $8zHUo$reactjsxruntime.jsx)((0, $8zHUo$persona.Inquiry), {
+        children: /*#__PURE__*/ (0, $8zHUo$reactjsxruntime.jsx)((0, ($parcel$interopDefault($8zHUo$personareact))), {
             inquiryId: inquiryId,
             sessionToken: inquirySessionToken,
             onComplete: onComplete,
             onCancel: onCancel,
             onError: onError,
-            onReady: onReady
+            onReady: onReady,
+            widgetPadding: widgetPadding,
+            onEvent: (event, metaData)=>{
+                if (event === $967b7369315e4395$var$PAGE_CHANGE_EVENT && (metaData?.name)?.startsWith($967b7369315e4395$var$TWILIO_INQUIRY_COMPLETED_PAGE)) onInquirySubmitted();
+            }
         })
     });
 };

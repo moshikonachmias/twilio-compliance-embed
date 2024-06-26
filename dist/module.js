@@ -1,6 +1,6 @@
 import {jsx as $hgUW1$jsx} from "react/jsx-runtime";
 import "react";
-import {Inquiry as $hgUW1$Inquiry} from "persona";
+import $hgUW1$personareact from "persona-react";
 import $hgUW1$styledcomponents from "styled-components";
 
 function $parcel$exportWildcard(dest, source) {
@@ -31,7 +31,9 @@ $parcel$export($d03a586c80f5907f$exports, "TwilioComplianceEmbed", () => $d03a58
 
 
 
-const $d03a586c80f5907f$export$fc241e6f86209970 = ({ inquiryId: inquiryId, inquirySessionToken: inquirySessionToken, onComplete: onComplete = ()=>{}, onCancel: onCancel = ()=>{}, onError: onError = ()=>{}, onReady: onReady = ()=>{} })=>{
+const $d03a586c80f5907f$var$PAGE_CHANGE_EVENT = "page-change";
+const $d03a586c80f5907f$var$TWILIO_INQUIRY_COMPLETED_PAGE = "twilio_inquiry_completed";
+const $d03a586c80f5907f$export$fc241e6f86209970 = ({ inquiryId: inquiryId, inquirySessionToken: inquirySessionToken, onComplete: onComplete = ()=>{}, onCancel: onCancel = ()=>{}, onError: onError = ()=>{}, onReady: onReady = ()=>{}, onInquirySubmitted: onInquirySubmitted = ()=>{}, widgetPadding: widgetPadding })=>{
     // The Incredible Singing Cat solution for responsive iframes
     // See https://stackoverflow.com/a/29784327
     const Container = (0, $hgUW1$styledcomponents).div`
@@ -49,13 +51,17 @@ const $d03a586c80f5907f$export$fc241e6f86209970 = ({ inquiryId: inquiryId, inqui
     }
   `;
     return /*#__PURE__*/ (0, $hgUW1$jsx)(Container, {
-        children: /*#__PURE__*/ (0, $hgUW1$jsx)((0, $hgUW1$Inquiry), {
+        children: /*#__PURE__*/ (0, $hgUW1$jsx)((0, $hgUW1$personareact), {
             inquiryId: inquiryId,
             sessionToken: inquirySessionToken,
             onComplete: onComplete,
             onCancel: onCancel,
             onError: onError,
-            onReady: onReady
+            onReady: onReady,
+            widgetPadding: widgetPadding,
+            onEvent: (event, metaData)=>{
+                if (event === $d03a586c80f5907f$var$PAGE_CHANGE_EVENT && (metaData?.name)?.startsWith($d03a586c80f5907f$var$TWILIO_INQUIRY_COMPLETED_PAGE)) onInquirySubmitted();
+            }
         })
     });
 };
